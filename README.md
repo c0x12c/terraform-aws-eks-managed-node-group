@@ -1,0 +1,1 @@
+# terraform-aws-eks-managed-node-group
