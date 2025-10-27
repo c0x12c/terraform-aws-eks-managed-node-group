@@ -157,7 +157,7 @@ variable "node_group_version" {
   description = "Kubernetes version for the managed node group"
 }
 
-variable "eks_cluster_version" {
+variable "cluster_version" {
   description = "The Kubernetes version to use for the EKS cluster"
   type        = string
 }
