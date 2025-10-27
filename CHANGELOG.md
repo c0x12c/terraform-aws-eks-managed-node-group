@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.0.1]() (2025-10-27)
 
-### Fix
+### Bug Fixes
 
 * Set Default Kubernetes Version for EKS Managed Node Group Instead of Null
 
