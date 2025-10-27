@@ -151,3 +151,9 @@ variable "iam_role_policy_statements" {
   type        = any
   default     = []
 }
+
+variable "node_version" {
+  type        = string
+  description = "Kubernetes version for the managed node group"
+  default     = "1.32"
+}

@@ -19,7 +19,7 @@ resource "aws_eks_node_group" "this" {
   # https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html#launch-template-custom-ami
   ami_type        = null
   release_version = null
-  version         = null
+  version         = var.node_version
 
   capacity_type        = var.capacity_type
   disk_size            = var.disk_size # if using a custom LT, set disk size on custom LT or else it will error here
