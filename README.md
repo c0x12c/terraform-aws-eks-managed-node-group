@@ -13,7 +13,7 @@ This module will create the components below
 
 ```hcl
 module "mng" {
-  source  = "c0x12c/eks-managed-node-group/aws"
+  source = "c0x12c/eks-managed-node-group/aws"
 
   name         = "mng"
   cluster_name = aws_eks_cluster.master.name
@@ -26,11 +26,13 @@ module "mng" {
   instance_types = ["t2.large"]
   capacity_type = "ON_DEMAND"
 
-  taints = [{
-    key    = "dedicated"
-    value  = "gpuGroup"
-    effect = "NO_SCHEDULE"
-  }]
+  taints = [
+    {
+      key    = "dedicated"
+      value  = "gpuGroup"
+      effect = "NO_SCHEDULE"
+    }
+  ]
 }
 ```
 
@@ -39,14 +41,14 @@ module "mng" {
 ## Requirements
 
 | Name                                                                      | Version  |
-| ------------------------------------------------------------------------- | -------- |
+|---------------------------------------------------------------------------|----------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.8 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws)                   | >= 5.83  |
 
 ## Providers
 
 | Name                                              | Version |
-| ------------------------------------------------- | ------- |
+|---------------------------------------------------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.83 |
 
 ## Modules
@@ -56,7 +58,7 @@ No modules.
 ## Resources
 
 | Name                                                                                                                                             | Type        |
-| ------------------------------------------------------------------------------------------------------------------------------------------------ | ----------- |
+|--------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
 | [aws_eks_node_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_node_group)                            | resource    |
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role)                                        | resource    |
 | [aws_iam_role_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy)                          | resource    |
@@ -69,15 +71,15 @@ No modules.
 ## Inputs
 
 | Name                                                                                                                            | Description                                                                                                                                                                                          | Type                                                                                                       | Default                                                   | Required |
-| ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | :------: |
+|---------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------|:--------:|
 | <a name="input_capacity_type"></a> [capacity\_type](#input\_capacity\_type)                                                     | Type of capacity associated with the EKS Node Group. Valid values: `ON_DEMAND`, `SPOT`                                                                                                               | `string`                                                                                                   | `"ON_DEMAND"`                                             |    no    |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name)                                                        | Name of associated EKS cluster                                                                                                                                                                       | `string`                                                                                                   | `null`                                                    |    no    |
+| <a name="input_cluster_version"></a> [cluster\_version](#input\_cluster\_version)                                               | The Kubernetes version to use for the EKS cluster                                                                                                                                                    | `string`                                                                                                   | n/a                                                       |   yes    |
 | <a name="input_create"></a> [create](#input\_create)                                                                            | Determines whether to create EKS managed node group or not                                                                                                                                           | `bool`                                                                                                     | `true`                                                    |    no    |
 | <a name="input_desired_size"></a> [desired\_size](#input\_desired\_size)                                                        | Desired number of instances/nodes                                                                                                                                                                    | `number`                                                                                                   | n/a                                                       |   yes    |
 | <a name="input_disk_size"></a> [disk\_size](#input\_disk\_size)                                                                 | Disk size in GiB for nodes. Defaults to `20`. Only valid when `use_custom_launch_template` = `false`                                                                                                 | `number`                                                                                                   | `null`                                                    |    no    |
 | <a name="input_force_update_version"></a> [force\_update\_version](#input\_force\_update\_version)                              | Force version update if existing pods are unable to be drained due to a pod disruption budget issue                                                                                                  | `bool`                                                                                                     | `false`                                                   |    no    |
 | <a name="input_iam_role_additional_policies"></a> [iam\_role\_additional\_policies](#input\_iam\_role\_additional\_policies)    | Additional policies to be added to the IAM role                                                                                                                                                      | `map(string)`                                                                                              | `{}`                                                      |    no    |
-| <a name="input_iam_role_arn"></a> [iam\_role\_arn](#input\_iam\_role\_arn)                                                      | Existing IAM role ARN for the node group. Required if `create_iam_role` is set to `false`                                                                                                            | `string`                                                                                                   | `null`                                                    |    no    |
 | <a name="input_iam_role_description"></a> [iam\_role\_description](#input\_iam\_role\_description)                              | Description of the role                                                                                                                                                                              | `string`                                                                                                   | `null`                                                    |    no    |
 | <a name="input_iam_role_name"></a> [iam\_role\_name](#input\_iam\_role\_name)                                                   | Name to use on IAM role created                                                                                                                                                                      | `string`                                                                                                   | `null`                                                    |    no    |
 | <a name="input_iam_role_path"></a> [iam\_role\_path](#input\_iam\_role\_path)                                                   | IAM role path                                                                                                                                                                                        | `string`                                                                                                   | `null`                                                    |    no    |
@@ -90,6 +92,7 @@ No modules.
 | <a name="input_max_size"></a> [max\_size](#input\_max\_size)                                                                    | Maximum number of instances/nodes                                                                                                                                                                    | `number`                                                                                                   | n/a                                                       |   yes    |
 | <a name="input_min_size"></a> [min\_size](#input\_min\_size)                                                                    | Minimum number of instances/nodes                                                                                                                                                                    | `number`                                                                                                   | n/a                                                       |   yes    |
 | <a name="input_name"></a> [name](#input\_name)                                                                                  | Name of the EKS managed node group                                                                                                                                                                   | `string`                                                                                                   | n/a                                                       |   yes    |
+| <a name="input_node_group_version"></a> [node\_group\_version](#input\_node\_group\_version)                                    | Kubernetes version for the managed node group                                                                                                                                                        | `string`                                                                                                   | n/a                                                       |   yes    |
 | <a name="input_node_repair_config"></a> [node\_repair\_config](#input\_node\_repair\_config)                                    | The node auto repair configuration for the node group                                                                                                                                                | <pre>object({<br/>    enabled = optional(bool, true)<br/>  })</pre>                                        | `null`                                                    |    no    |
 | <a name="input_remote_access"></a> [remote\_access](#input\_remote\_access)                                                     | Configuration block with remote access settings. Only valid when `use_custom_launch_template` = `false`                                                                                              | `any`                                                                                                      | `{}`                                                      |    no    |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids)                                                              | Identifiers of EC2 Subnets to associate with the EKS Node Group. These subnets must have the following resource tag: `kubernetes.io/cluster/CLUSTER_NAME`                                            | `list(string)`                                                                                             | `null`                                                    |    no    |
@@ -100,7 +103,7 @@ No modules.
 ## Outputs
 
 | Name                                                                                           | Description |
-| ---------------------------------------------------------------------------------------------- | ----------- |
+|------------------------------------------------------------------------------------------------|-------------|
 | <a name="output_managed_node_group"></a> [managed\_node\_group](#output\_managed\_node\_group) | n/a         |
 | <a name="output_node_role_arn"></a> [node\_role\_arn](#output\_node\_role\_arn)                | n/a         |
 

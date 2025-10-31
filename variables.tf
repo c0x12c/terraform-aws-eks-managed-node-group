@@ -151,3 +151,13 @@ variable "iam_role_policy_statements" {
   type        = any
   default     = []
 }
+
+variable "node_group_version" {
+  type        = string
+  description = "Kubernetes version for the managed node group"
+}
+
+variable "cluster_version" {
+  description = "The Kubernetes version to use for the EKS cluster"
+  type        = string
+}
